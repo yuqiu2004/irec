@@ -89,6 +89,9 @@ export default function HomePage() {
       {/* 背景装饰 */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-pink-200/40 dark:bg-pink-900/30 rounded-full blur-3xl z-0" />
       <div className="absolute top-1/2 right-0 w-80 h-80 bg-blue-200/40 dark:bg-blue-900/30 rounded-full blur-2xl z-0" />
+      <Link href="/add" className="fixed right-8 bottom-8 z-40 w-14 h-14 flex items-center justify-center rounded-full bg-bili-blue text-white text-3xl shadow-lg hover:bg-bili-blue-dark transition group" aria-label="添加作品">
+        <svg width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" className="transition"><path d="M12 5v14M5 12h14"/></svg>
+      </Link>
     </div>
   )
 }
