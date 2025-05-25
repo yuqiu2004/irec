@@ -1,12 +1,10 @@
 package com.yuqiu.controller;
 
+import com.yuqiu.model.dto.CommentDTO;
 import com.yuqiu.service.CommentService;
 import com.yuqiu.utils.R;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/comment")
@@ -18,5 +16,10 @@ public class CommentController {
     @GetMapping("/{id}")
     public R listAll(@PathVariable int id) {
         return R.success(commentService.listAll(id));
+    }
+
+    @PutMapping
+    public R add(@RequestBody CommentDTO commentDTO) {
+        return R.success(commentService.add(commentDTO));
     }
 }
