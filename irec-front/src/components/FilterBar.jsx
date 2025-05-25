@@ -1,29 +1,48 @@
 'use client'
 
+const mainTypes = [
+  { label: '全部', value: '' },
+  { label: '电影', value: 'movie' },
+  { label: '番剧', value: 'bangumi' },
+]
+const genres = [
+  { label: '全部', value: '' },
+  { label: '动作', value: 'action' },
+  { label: '剧情', value: 'drama' },
+  { label: '喜剧', value: 'comedy' },
+]
+
 export default function FilterBar({ filters, onChange }) {
   return (
-    <div className="flex gap-4">
-      <select
-        value={filters.genre}
-        onChange={(e) => onChange({ ...filters, genre: e.target.value })}
-        className="border p-2 rounded"
-      >
-        <option value="">全部类型</option>
-        <option value="action">动作</option>
-        <option value="drama">剧情</option>
-        <option value="comedy">喜剧</option>
-      </select>
-
-      <select
-        value={filters.year}
-        onChange={(e) => onChange({ ...filters, year: e.target.value })}
-        className="border p-2 rounded"
-      >
-        <option value="">全部年份</option>
-        <option value="2025">2025</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-      </select>
+    <div className="flex flex-col gap-6 p-0">
+      <div className="flex flex-col gap-1">
+        <div className="text-[11px] text-gray-400 mb-1 pl-1 tracking-wide">类型</div>
+        {mainTypes.map(t => (
+          <button
+            key={t.value}
+            className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition focus:outline-none
+              ${filters.mainType === t.value ? 'bg-bili-blue text-white' : 'bg-transparent text-bili-blue hover:bg-bili-blue/10'}`}
+            style={{border: 'none', boxShadow: 'none'}}
+            onClick={() => onChange({ ...filters, mainType: t.value })}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+      <div className="flex flex-col gap-1">
+        <div className="text-[11px] text-gray-400 mb-1 pl-1 tracking-wide">题材</div>
+        {genres.map(g => (
+          <button
+            key={g.value}
+            className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition focus:outline-none
+              ${filters.genre === g.value ? 'bg-bili-blue text-white' : 'bg-transparent text-bili-blue hover:bg-bili-blue/10'}`}
+            style={{border: 'none', boxShadow: 'none'}}
+            onClick={() => onChange({ ...filters, genre: g.value })}
+          >
+            {g.label}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }

@@ -6,6 +6,7 @@ export const mockMovies = [
       year: '2002',
       cover: 'https://picsum.photos/id/1011/300/200',
       description: '一部关于卧底和警匪的经典港片。',
+      mainType: 'movie',
     },
     {
       id: '2',
@@ -14,6 +15,7 @@ export const mockMovies = [
       year: '1999',
       cover: 'https://picsum.photos/id/1012/300/200',
       description: '周星驰的代表作，笑中带泪。',
+      mainType: 'movie',
     },
     {
       id: '3',
@@ -22,6 +24,7 @@ export const mockMovies = [
       year: '1993',
       cover: 'https://picsum.photos/id/1013/300/200',
       description: '张国荣主演的文艺巅峰之作。',
+      mainType: 'movie',
     },
     {
       id: '4',
@@ -30,6 +33,7 @@ export const mockMovies = [
       year: '2019',
       cover: 'https://picsum.photos/id/1015/300/200',
       description: '中国科幻电影的开山之作。',
+      mainType: 'bangumi',
     },
   ]
   
