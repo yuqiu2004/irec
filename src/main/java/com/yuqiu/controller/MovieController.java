@@ -1,5 +1,6 @@
 package com.yuqiu.controller;
 
+import com.yuqiu.model.dto.MovieDTO;
 import com.yuqiu.model.dto.MoviePageDTO;
 import com.yuqiu.service.MovieService;
 import com.yuqiu.utils.R;
@@ -21,5 +22,10 @@ public class MovieController {
     @GetMapping("/top10")
     public R top10() {
         return R.success(movieService.top10());
+    }
+
+    @PutMapping
+    public R add(@RequestBody MovieDTO movieDTO) {
+        return R.success(movieService.add(movieDTO));
     }
 }

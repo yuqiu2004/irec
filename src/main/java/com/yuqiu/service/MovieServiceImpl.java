@@ -1,16 +1,23 @@
 package com.yuqiu.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yuqiu.constant.MainTypeEnum;
 import com.yuqiu.exception.BaseException;
+import com.yuqiu.mapper.GenreMapper;
+import com.yuqiu.mapper.MovieGenreMapper;
 import com.yuqiu.mapper.MovieMapper;
+import com.yuqiu.model.dto.MovieDTO;
 import com.yuqiu.model.dto.MoviePageDTO;
+import com.yuqiu.model.entity.Genre;
 import com.yuqiu.model.entity.Movie;
+import com.yuqiu.model.entity.MovieGenre;
 import com.yuqiu.model.vo.MoviePageVo;
 import com.yuqiu.model.vo.MovieTopVo;
 import com.yuqiu.model.vo.MovieVo;
 import io.micrometer.common.util.StringUtils;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +27,14 @@ public class MovieServiceImpl implements MovieService{
 
     @Resource
     private MovieMapper movieMapper;
+
+    @Resource
+    private GenreMapper genreMapper;
+
+    @Resource
+    private MovieGenreMapper movieGenreMapper;
+    @Autowired
+    private MovieService movieService;
 
     @Override
     public MoviePageVo page(MoviePageDTO moviePageDTO) {
@@ -56,5 +71,43 @@ public class MovieServiceImpl implements MovieService{
                         .popularity(m.getPopularity())
                         .build())
                 .toList();
+    }
+
+    @Override
+    public Boolean add(MovieDTO movieDTO) {
+        Movie movie = new Movie();
+        BeanUtil.copyProperties(movieDTO, movie);
+        movie.setMainType(MainTypeEnum.getCodeByName(movieDTO.getType()));
+        movie.setPopularity(0);
+        movieMapper.insert(movie);
+        // 插入类别 多线程处理
+        List<String> genres = movieDTO.getGenres();
+        genres.parallelStream().forEach(name -> {
+            Genre one = genreMapper.selectOne((new QueryWrapper<Genre>()).eq("name", name));
+            if (null == one) {
+                one = Genre.builder()
+                        .name(name)
+                        .count(1)
+                        .build();
+                genreMapper.insert(one);
+                MovieGenre movieGenre = MovieGenre.builder()
+                        .movieId(movie.getId())
+                        .genreId(one.getId())
+                        .build();
+                movieGenreMapper.insert(movieGenre);
+            } else {
+                one.setCount(one.getCount()+1);
+                genreMapper.updateById(one);
+                QueryWrapper<MovieGenre> wrapper = new QueryWrapper<>();
+                wrapper.eq("movie_id", movie.getId()).eq("genre_id", one.getId());
+                MovieGenre movieGenre = movieGenreMapper.selectOne(wrapper);
+                if (null == movieGenre)
+                    movieGenreMapper.insert(MovieGenre.builder()
+                                                    .movieId(movie.getId())
+                                                    .genreId(one.getId())
+                                                    .build());
+            }
+        });
+        return true;
     }
 }
