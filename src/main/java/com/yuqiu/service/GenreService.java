@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface GenreService {
     List<GenreVo> list();
+
+    List<String> search(String name);
 }

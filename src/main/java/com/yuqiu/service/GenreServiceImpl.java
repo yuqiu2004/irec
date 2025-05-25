@@ -25,4 +25,13 @@ public class GenreServiceImpl implements GenreService{
                 .map(genre -> GenreVo.builder().name(genre.getName()).build())
                 .toList();
     }
+
+    @Override
+    public List<String> search(String name) {
+        // 根据输入模糊查询
+        QueryWrapper<Genre> wrapper = new QueryWrapper<>();
+        wrapper.like("name", name);
+        List<Genre> genres = genreMapper.selectList(wrapper);
+        return genres.stream().map(Genre::getName).toList();
+    }
 }
