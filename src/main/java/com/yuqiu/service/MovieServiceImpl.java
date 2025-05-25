@@ -113,6 +113,9 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public MovieDetailVo detail(int id) {
         Movie movie = movieMapper.selectById(id);
+        // 更新访问量
+        movie.setPopularity(movie.getPopularity()+1);
+        movieMapper.updateById(movie);
         MovieDetailVo movieDetailVo = new MovieDetailVo();
         BeanUtil.copyProperties(movie, movieDetailVo);
         movieDetailVo.setMainType(MainTypeEnum.getNameFromCode(movie.getType()));
