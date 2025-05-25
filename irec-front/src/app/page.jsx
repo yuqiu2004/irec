@@ -30,6 +30,24 @@ function ThemeToggle() {
   )
 }
 
+function RankingList({ movies }) {
+  const top10 = [...movies]
+    .sort((a, b) => b.popularity - a.popularity)
+    .slice(0, 10)
+  return (
+    <aside className="min-w-[180px] w-56 bg-white/70 dark:bg-gray-800/70 rounded-2xl shadow p-4 flex flex-col gap-2 border border-blue-50 dark:border-gray-800">
+      <div className="font-bold text-bili-blue mb-2 text-base">排行榜 TOP 10</div>
+      {top10.map((movie, idx) => (
+        <Link key={movie.id} href={`/movie/${movie.id}`} className="flex items-center gap-2 py-1 px-2 rounded hover:bg-bili-blue/10 transition text-sm">
+          <span className={`font-bold ${idx < 3 ? 'text-pink-500' : 'text-gray-400'}`}>{idx + 1}</span>
+          <span className="truncate flex-1">{movie.title}</span>
+          <span className="text-xs text-gray-400">{movie.popularity}</span>
+        </Link>
+      ))}
+    </aside>
+  )
+}
+
 export default function HomePage() {
   const [movies, setMovies] = useState([])
   const [filters, setFilters] = useState({ mainType: '', genre: '' })
@@ -63,6 +81,9 @@ export default function HomePage() {
               ))}
             </div>
           </section>
+          <div className="hidden lg:block ml-4">
+            <RankingList movies={movies} />
+          </div>
         </div>
       </main>
       {/* 背景装饰 */}

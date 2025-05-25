@@ -33,7 +33,12 @@ export default function MovieCard({ movie }) {
         <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 line-clamp-2 min-h-[2.5em]">{movie.title}</h3>
         <div className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 min-h-[2.5em]">{movie.description || '暂无简介'}</div>
         <div className="flex flex-wrap gap-2 mt-auto">
-          <span className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{movie.genre}</span>
+          {Array.isArray(movie.genre)
+            ? movie.genre.map(g => (
+                <span key={g} className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{g}</span>
+              ))
+            : <span className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{movie.genre}</span>
+          }
           <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-full text-xs">{movie.year}</span>
         </div>
       </div>

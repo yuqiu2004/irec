@@ -12,9 +12,11 @@ export default async function MovieDetail({ params }) {
     <div className="max-w-4xl mx-auto p-6 bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow-xl mt-8">
       <Link
         href="/"
-        className="inline-block mb-4 px-4 py-1.5 rounded-lg bg-bili-blue text-white font-semibold shadow hover:bg-bili-blue-dark transition"
+        className="fixed left-8 top-8 z-30 w-12 h-12 flex items-center justify-center rounded-full bg-white/80 dark:bg-gray-900/80 shadow-lg border border-blue-100 dark:border-gray-800 hover:bg-bili-blue hover:text-white transition text-bili-blue text-2xl group"
+        style={{ backdropFilter: 'blur(6px)' }}
+        aria-label="返回首页"
       >
-        ← 返回
+        <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" className="group-hover:stroke-white transition"><path d="M15 19l-7-7 7-7"/></svg>
       </Link>
       <div className="flex flex-col md:flex-row gap-8 items-start mb-8">
         <img
