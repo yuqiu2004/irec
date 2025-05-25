@@ -19,6 +19,6 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      */
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginIntercept)
-                .addPathPatterns("/manage/**");
+                .excludePathPatterns("/**");
     }
 }
