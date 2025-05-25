@@ -7,6 +7,7 @@ import com.yuqiu.mapper.MovieMapper;
 import com.yuqiu.model.dto.MoviePageDTO;
 import com.yuqiu.model.entity.Movie;
 import com.yuqiu.model.vo.MoviePageVo;
+import com.yuqiu.model.vo.MovieTopVo;
 import com.yuqiu.model.vo.MovieVo;
 import io.micrometer.common.util.StringUtils;
 import jakarta.annotation.Resource;
@@ -42,5 +43,18 @@ public class MovieServiceImpl implements MovieService{
                         .peek(movie -> movie.setMainType(MainTypeEnum.getNameFromCode(movie.getType())))
                         .toList())
                 .build();
+    }
+
+    @Override
+    public List<MovieTopVo> top10() {
+        QueryWrapper<Movie> wrapper = new QueryWrapper<>();
+        wrapper.select("title", "popularity").orderByDesc("popularity");
+        List<Movie> list = movieMapper.selectList(wrapper);
+        return list.stream()
+                .map(m -> MovieTopVo.builder()
+                        .title(m.getTitle())
+                        .popularity(m.getPopularity())
+                        .build())
+                .toList();
     }
 }
