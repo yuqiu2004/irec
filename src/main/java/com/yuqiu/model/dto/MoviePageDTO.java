@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class MoviePageDTO {
+    private int id;
     private int page;
     private int pageSize;
     private String mainType;

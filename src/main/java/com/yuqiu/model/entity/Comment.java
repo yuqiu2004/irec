@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Comment {
     @TableId
-    private String id;
+    private Integer id;
     private String movieId;
     private String userName;
     private String text;

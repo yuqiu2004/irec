@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Movie {
     @TableId
-    private String id;
+    private Integer id;
     private String title;
     private Integer year;
     private String cover;

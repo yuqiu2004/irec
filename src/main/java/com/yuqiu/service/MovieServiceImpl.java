@@ -63,10 +63,11 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public List<MovieTopVo> top10() {
         QueryWrapper<Movie> wrapper = new QueryWrapper<>();
-        wrapper.select("title", "popularity").orderByDesc("popularity");
+        wrapper.select("id", "title", "popularity").orderByDesc("popularity");
         List<Movie> list = movieMapper.selectList(wrapper);
         return list.stream()
                 .map(m -> MovieTopVo.builder()
+                        .id(m.getId())
                         .title(m.getTitle())
                         .popularity(m.getPopularity())
                         .build())

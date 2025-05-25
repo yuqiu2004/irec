@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class MovieTopVo {
+    private int id;
     private String title;
     private int popularity;
 }
