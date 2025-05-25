@@ -28,4 +28,9 @@ public class MovieController {
     public R add(@RequestBody MovieDTO movieDTO) {
         return R.success(movieService.add(movieDTO));
     }
+
+    @GetMapping("/{id}")
+    public R detail(@PathVariable int id) {
+        return R.success(movieService.detail(id));
+    }
 }

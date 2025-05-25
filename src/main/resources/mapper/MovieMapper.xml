@@ -6,6 +6,7 @@
 
     <select id="pageQuery" resultType="com.yuqiu.model.vo.MovieVo">
         SELECT
+            m.id,
             m.title,
             m.year,
             m.cover,
@@ -19,7 +20,7 @@
                 AND g.name = #{genreName}
             </if>
             <if test="type != null">
-                AND m.main_type = #{type}
+                AND m.type = #{type}
             </if>
             AND m.year BETWEEN #{startYear} AND #{endYear}
         </where>

@@ -12,12 +12,12 @@ import com.yuqiu.model.dto.MoviePageDTO;
 import com.yuqiu.model.entity.Genre;
 import com.yuqiu.model.entity.Movie;
 import com.yuqiu.model.entity.MovieGenre;
+import com.yuqiu.model.vo.MovieDetailVo;
 import com.yuqiu.model.vo.MoviePageVo;
 import com.yuqiu.model.vo.MovieTopVo;
 import com.yuqiu.model.vo.MovieVo;
 import io.micrometer.common.util.StringUtils;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +33,6 @@ public class MovieServiceImpl implements MovieService{
 
     @Resource
     private MovieGenreMapper movieGenreMapper;
-    @Autowired
-    private MovieService movieService;
 
     @Override
     public MoviePageVo page(MoviePageDTO moviePageDTO) {
@@ -78,7 +76,7 @@ public class MovieServiceImpl implements MovieService{
     public Boolean add(MovieDTO movieDTO) {
         Movie movie = new Movie();
         BeanUtil.copyProperties(movieDTO, movie);
-        movie.setMainType(MainTypeEnum.getCodeByName(movieDTO.getType()));
+        movie.setType(MainTypeEnum.getCodeByName(movieDTO.getType()));
         movie.setPopularity(0);
         movieMapper.insert(movie);
         // 插入类别 多线程处理
@@ -110,5 +108,16 @@ public class MovieServiceImpl implements MovieService{
             }
         });
         return true;
+    }
+
+    @Override
+    public MovieDetailVo detail(int id) {
+        Movie movie = movieMapper.selectById(id);
+        MovieDetailVo movieDetailVo = new MovieDetailVo();
+        BeanUtil.copyProperties(movie, movieDetailVo);
+        movieDetailVo.setMainType(MainTypeEnum.getNameFromCode(movie.getType()));
+        List<String> genres = movieGenreMapper.selectNameByMovieId(id);
+        movieDetailVo.setGenres(genres);
+        return movieDetailVo;
     }
 }

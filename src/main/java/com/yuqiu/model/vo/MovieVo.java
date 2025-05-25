@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 @Builder
 public class MovieVo {
+    private Integer id;
     private String title;
     private Integer year;
     private String cover;
