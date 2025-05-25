@@ -43,6 +43,30 @@ export default function FilterBar({ filters, onChange }) {
           </button>
         ))}
       </div>
+      <div className="flex flex-col gap-1">
+        <div className="text-[11px] text-gray-400 mb-1 pl-1 tracking-wide">年份区间</div>
+        <div className="flex gap-2 items-center">
+          <input
+            type="number"
+            placeholder="起始年份"
+            className="w-1/2 px-3 py-1.5 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none text-sm"
+            value={filters.yearStart || ''}
+            onChange={e => onChange({ ...filters, yearStart: e.target.value })}
+            min="1900"
+            max="2100"
+          />
+          <span className="text-gray-400">-</span>
+          <input
+            type="number"
+            placeholder="结束年份"
+            className="w-1/2 px-3 py-1.5 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none text-sm"
+            value={filters.yearEnd || ''}
+            onChange={e => onChange({ ...filters, yearEnd: e.target.value })}
+            min="1900"
+            max="2100"
+          />
+        </div>
+      </div>
     </div>
   )
 }

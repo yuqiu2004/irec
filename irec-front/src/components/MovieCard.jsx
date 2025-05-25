@@ -1,10 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
 
 export default function MovieCard({ movie }) {
-  const [liked, setLiked] = useState(false)
   return (
     <div className="relative group bg-white dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-full border border-blue-50 dark:border-gray-800">
       <div className="relative w-full aspect-[16/9] bg-gray-100 dark:bg-gray-800 overflow-hidden">
@@ -20,14 +18,6 @@ export default function MovieCard({ movie }) {
             {movie.rating}
           </span>
         )}
-        {/* 喜欢按钮 */}
-        <button
-          className={`absolute top-2 right-2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow hover:bg-pink-100 dark:hover:bg-pink-900 transition ${liked ? 'text-pink-500' : 'text-gray-400'}`}
-          onClick={e => { e.stopPropagation(); setLiked(l => !l) }}
-          aria-label="喜欢"
-        >
-          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.2-8.5-8.1C1.2 10.1 2.1 7.1 5 6.3c2.1-.6 3.7 1.1 4.5 2.1.8-1 2.4-2.7 4.5-2.1 2.9.8 3.8 3.8 1.5 6.6C18.5 15.8 12 21 12 21z"/></svg>
-        </button>
       </div>
       <div className="flex-1 flex flex-col gap-2 p-4">
         <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 line-clamp-2 min-h-[2.5em]">{movie.title}</h3>

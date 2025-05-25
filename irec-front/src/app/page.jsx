@@ -5,6 +5,7 @@ import { getMoviesByFilter } from '../lib/movieService'
 import MovieCard from '../components/MovieCard'
 import FilterBar from '../components/FilterBar'
 import Link from 'next/link'
+import { mockMovies } from '../lib/mockData'
 
 function ThemeToggle() {
   const [dark, setDark] = useState(false)
@@ -82,7 +83,7 @@ export default function HomePage() {
             </div>
           </section>
           <div className="hidden lg:block ml-4">
-            <RankingList movies={movies} />
+            <RankingList movies={mockMovies} />
           </div>
         </div>
       </main>

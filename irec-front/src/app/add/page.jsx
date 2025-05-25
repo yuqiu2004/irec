@@ -13,7 +13,6 @@ export default function AddMoviePage() {
     year: '',
     cover: '',
     description: '',
-    popularity: '',
     code: '',
   })
   const [error, setError] = useState('')
@@ -48,7 +47,6 @@ export default function AddMoviePage() {
           <input name="year" value={form.year} onChange={handleChange} placeholder="年份" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
           <input name="cover" value={form.cover} onChange={handleChange} placeholder="封面图片URL" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
           <textarea name="description" value={form.description} onChange={handleChange} placeholder="简介" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" rows={3} required />
-          <input name="popularity" value={form.popularity} onChange={handleChange} placeholder="受欢迎度（数字）" type="number" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
           <input name="code" value={form.code} onChange={handleChange} placeholder="上传码（必填）" type="password" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
           {error && <div className="text-red-500 text-sm">{error}</div>}
           <button type="submit" className="w-full py-2 rounded bg-bili-blue text-white font-bold hover:bg-bili-blue-dark transition">提交</button>
