@@ -10,7 +10,7 @@
             m.title,
             m.year,
             m.cover,
-            m.main_type AS type,
+            m.type AS type,
             GROUP_CONCAT(g.name) AS genres
         FROM movie m
         LEFT JOIN movie_genre mg ON m.id = mg.movie_id
