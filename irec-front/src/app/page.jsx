@@ -59,7 +59,13 @@ export default function HomePage() {
       pageSize: 100,
       mainType: filters.mainType,
       genreName: filters.genre,
-    }).then(res => setMovies(res.movies || res.data || []))
+    }).then(res => {
+      let movies = [];
+      if (res && res.data && Array.isArray(res.data.movies)) {
+        movies = res.data.movies;
+      }
+      setMovies(movies);
+    })
   }, [filters])
 
   return (
