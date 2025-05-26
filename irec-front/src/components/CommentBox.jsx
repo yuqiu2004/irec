@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { postComment } from '../lib/commentService'
+import { postComment } from '../lib/api'
 
 export default function CommentBox({ movieId }) {
   const [text, setText] = useState('')
@@ -9,7 +9,7 @@ export default function CommentBox({ movieId }) {
 
   const handleSubmit = async () => {
     if (!text.trim()) return
-    await postComment(movieId, text)
+    await postComment(movieId, '匿名', text)
     setText('')
     // 建议这里刷新评论（此处略）
   }

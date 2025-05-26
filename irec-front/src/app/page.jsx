@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getMoviesByFilter } from '../lib/movieService'
+import { getMovies } from '../lib/api'
 import MovieCard from '../components/MovieCard'
 import FilterBar from '../components/FilterBar'
 import Link from 'next/link'
@@ -54,7 +54,12 @@ export default function HomePage() {
   const [filters, setFilters] = useState({ mainType: '', genre: '' })
 
   useEffect(() => {
-    getMoviesByFilter(filters).then(setMovies)
+    getMovies({
+      page: 1,
+      pageSize: 100,
+      mainType: filters.mainType,
+      genreName: filters.genre,
+    }).then(res => setMovies(res.movies || res.data || []))
   }, [filters])
 
   return (

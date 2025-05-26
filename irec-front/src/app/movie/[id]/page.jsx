@@ -1,12 +1,11 @@
-import { getMovieById } from '../../../lib/movieService'
-import { getComments } from '../../../lib/commentService'
+import { getMovieDetail, getComments } from '../../../lib/api'
 import CommentBox from '../../../components/CommentBox'
 import CommentList from '../../../components/CommentList'
 import Link from 'next/link'
 
 export default async function MovieDetail({ params }) {
-  const movie = await getMovieById(params.id)
-  const comments = await getComments(params.id)
+  const movie = await getMovieDetail(params.id)
+  const { data: comments } = await getComments(params.id)
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow-xl mt-8">

@@ -1,86 +1,154 @@
-export const USE_MOCK = true;
+export const USE_MOCK = true; // 切换mock/接口
+export const API_BASE = USE_MOCK ? '' : 'http://localhost:8080'; // 后端基础路径，接口模式下请改成你的后端地址
 
 import { mockMovies, mockComments } from './mockData';
 
-// 获取热门题材
-export async function getHotGenres() {
+// 获取所有类型
+export async function getGenres() {
   if (USE_MOCK) {
-    const genreCount = {};
+    // mockMovies的genre字段可能为数组
+    const genreSet = new Set();
+    mockMovies.forEach(m => {
+      (Array.isArray(m.genre) ? m.genre : [m.genre]).forEach(g => genreSet.add(g));
+    });
+    return Array.from(genreSet).map(name => ({ name }));
+  }
+  return fetch(`${API_BASE}/genre/list`).then(res => res.json());
+}
+
+// 按名称搜索类型
+export async function getGenreByName(name) {
+  if (USE_MOCK) {
+    const genreSet = new Set();
     mockMovies.forEach(m => {
       (Array.isArray(m.genre) ? m.genre : [m.genre]).forEach(g => {
-        genreCount[g] = (genreCount[g] || 0) + 1;
+        if (g === name) genreSet.add(g);
       });
     });
-    return Object.entries(genreCount)
-      .sort((a, b) => b[1] - a[1])
-      .map(([genre]) => genre)
-      .slice(0, 10);
+    return Array.from(genreSet).map(name => ({ name }));
   }
-  // TODO: return fetch('/api/hot-genres').then(res => res.json());
+  return fetch(`${API_BASE}/genre/${name}`).then(res => res.json());
 }
 
-// 分页获取影视列表
-export async function getMovies({ page = 1, pageSize = 20, mainType, genre, yearStart, yearEnd } = {}) {
-  if (USE_MOCK) {
-    let list = [...mockMovies];
-    if (mainType) list = list.filter(m => m.mainType === mainType);
-    if (genre) list = list.filter(m => (Array.isArray(m.genre) ? m.genre.includes(genre) : m.genre === genre));
-    if (yearStart) list = list.filter(m => parseInt(m.year) >= parseInt(yearStart));
-    if (yearEnd) list = list.filter(m => parseInt(m.year) <= parseInt(yearEnd));
-    const total = list.length;
-    const data = list.slice((page - 1) * pageSize, page * pageSize);
-    return { data, total };
-  }
-  // TODO: return fetch(`/api/movies?...`).then(res => res.json());
-}
-
-// 获取排行榜前十
-export async function getTop10() {
-  if (USE_MOCK) {
-    return [...mockMovies].sort((a, b) => b.popularity - a.popularity).slice(0, 10);
-  }
-  // TODO: return fetch('/api/top10').then(res => res.json());
-}
-
-// 获取详情
-export async function getMovieDetail(id) {
-  if (USE_MOCK) {
-    return mockMovies.find(m => m.id === id);
-  }
-  // TODO: return fetch(`/api/movie/${id}`).then(res => res.json());
-}
-
-// 分页获取评论
-export async function getComments(movieId, { page = 1, pageSize = 10 } = {}) {
+// 获取某电影所有评论
+export async function getComments(movieId) {
   if (USE_MOCK) {
     const all = mockComments[movieId] || [];
+    // mock数据字段兼容API文档
     return {
-      data: all.slice((page - 1) * pageSize, page * pageSize),
+      data: all.map(c => ({
+        id: c.id,
+        movieId: movieId,
+        userName: c.user,
+        text: c.text,
+      })),
       total: all.length,
     };
   }
-  // TODO: return fetch(`/api/comments?movieId=${movieId}&page=${page}&pageSize=${pageSize}`).then(res => res.json());
+  return fetch(`${API_BASE}/comment/${movieId}`).then(res => res.json());
 }
 
-// 发表评论
-export async function postComment(movieId, text) {
+// 新增评论
+export async function postComment(movieId, userName, text) {
   if (USE_MOCK) {
     const newComment = {
       id: Date.now().toString(),
-      user: '匿名',
+      user: userName || '匿名',
       text,
     };
     if (!mockComments[movieId]) mockComments[movieId] = [];
     mockComments[movieId].unshift(newComment);
-    return newComment;
+    return { success: true };
   }
-  // TODO: return fetch(`/api/comments`, { method: 'POST', body: JSON.stringify({ movieId, text }) }).then(res => res.json());
+  return fetch(`${API_BASE}/comment`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ movieId, userName, text }),
+  }).then(res => res.json());
 }
 
-// 上传接口
-export async function uploadMovie(form) {
+// 分页获取电影
+export async function getMovies({ id = 0, page = 1, pageSize = 10, mainType = '', genreName = '', startYear = 1900, endYear = 2100 } = {}) {
   if (USE_MOCK) {
-    return { success: true, id: Date.now().toString() };
+    let list = [...mockMovies];
+    if (id) list = list.filter(m => m.id === String(id));
+    if (mainType) list = list.filter(m => m.mainType === mainType);
+    if (genreName) list = list.filter(m => (Array.isArray(m.genre) ? m.genre.includes(genreName) : m.genre === genreName));
+    if (startYear) list = list.filter(m => parseInt(m.year) >= parseInt(startYear));
+    if (endYear) list = list.filter(m => parseInt(m.year) <= parseInt(endYear));
+    const totalPage = Math.ceil(list.length / pageSize);
+    const movies = list.slice((page - 1) * pageSize, page * pageSize).map(m => ({
+      id: m.id,
+      title: m.title,
+      year: parseInt(m.year),
+      cover: m.cover,
+      mainType: m.mainType,
+      type: 0, // mock类型编号
+      genres: Array.isArray(m.genre) ? m.genre : [m.genre],
+    }));
+    return { totalPage, movies };
   }
-  // TODO: return fetch(`/api/upload`, { method: 'POST', body: ... }).then(res => res.json());
+  return fetch(`${API_BASE}/movie/page`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, page, pageSize, mainType, genreName, startYear, endYear }),
+  }).then(res => res.json());
+}
+
+// 获取电影Top10
+export async function getTop10() {
+  if (USE_MOCK) {
+    return mockMovies
+      .sort((a, b) => b.popularity - a.popularity)
+      .slice(0, 10)
+      .map(m => ({
+        id: m.id,
+        title: m.title,
+        popularity: m.popularity,
+      }));
+  }
+  return fetch(`${API_BASE}/movie/top10`).then(res => res.json());
+}
+
+// 新增电影
+export async function addMovie({ title, year, cover, description, type, genres }) {
+  if (USE_MOCK) {
+    const newMovie = {
+      id: Date.now().toString(),
+      title,
+      year,
+      cover,
+      description,
+      mainType: type,
+      genre: genres,
+      popularity: 0,
+    };
+    mockMovies.unshift(newMovie);
+    return { success: true };
+  }
+  return fetch(`${API_BASE}/movie`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, year, cover, description, type, genres }),
+  }).then(res => res.json());
+}
+
+// 获取电影详情
+export async function getMovieDetail(id) {
+  if (USE_MOCK) {
+    const m = mockMovies.find(m => m.id === String(id));
+    if (!m) return null;
+    return {
+      id: m.id,
+      title: m.title,
+      year: parseInt(m.year),
+      cover: m.cover,
+      mainType: m.mainType,
+      type: 0,
+      genres: Array.isArray(m.genre) ? m.genre : [m.genre],
+      description: m.description,
+      popularity: m.popularity,
+    };
+  }
+  return fetch(`${API_BASE}/movie/${id}`).then(res => res.json());
 } 
