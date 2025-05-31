@@ -6,16 +6,23 @@ import { mockMovies, mockComments } from './mockData';
 // 获取所有类型
 export async function getGenres() {
   if (USE_MOCK) {
+    // 模拟API延迟
+    await new Promise(resolve => setTimeout(resolve, 300))
+    
     // 从mockMovies中获取所有类型
-    const genreSet = new Set();
-    mockMovies.forEach(m => {
-      if (Array.isArray(m.genre)) {
-        m.genre.forEach(g => genreSet.add(g));
-      } else {
-        genreSet.add(m.genre);
+    const types = new Set()
+    mockMovies.forEach(movie => {
+      if (Array.isArray(movie.type)) {
+        movie.type.forEach(t => types.add(t))
+      } else if (movie.type) {
+        types.add(movie.type)
       }
-    });
-    return Array.from(genreSet).map(name => ({ name }));
+    })
+    
+    return Array.from(types).map(type => ({
+      id: type,
+      name: type
+    }))
   }
   return fetch(`${API_BASE}/genre/list`).then(res => res.json());
 }
@@ -23,13 +30,13 @@ export async function getGenres() {
 // 按名称搜索类型
 export async function getGenreByName(name) {
   if (USE_MOCK) {
-    const genreSet = new Set();
+    const typeSet = new Set();
     mockMovies.forEach(m => {
-      (Array.isArray(m.genre) ? m.genre : [m.genre]).forEach(g => {
-        if (g === name) genreSet.add(g);
+      (Array.isArray(m.type) ? m.type : [m.type]).forEach(t => {
+        if (t === name) typeSet.add(t);
       });
     });
-    return Array.from(genreSet).map(name => ({ name }));
+    return Array.from(typeSet).map(name => ({ name }));
   }
   return fetch(`${API_BASE}/genre/${name}`).then(res => res.json());
 }
@@ -72,49 +79,62 @@ export async function postComment(movieId, userName, text) {
 }
 
 // 分页获取电影
-export async function getMovies({ id = 0, page = 1, pageSize = 10, mainType = '', genreName = '', startYear = 1900, endYear = 2100 } = {}) {
+export async function getMovies({ page = 1, pageSize = 10, mainType, typeName, year, sortBy = 'popularity' } = {}) {
   if (USE_MOCK) {
-    // 先进行所有筛选
-    let list = [...mockMovies];
+    // 模拟API延迟
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    // 过滤电影
+    let filteredMovies = [...mockMovies]
     
-    // 应用筛选条件
-    if (id) list = list.filter(m => m.id === String(id));
-    if (mainType) list = list.filter(m => m.mainType === mainType);
-    if (genreName) list = list.filter(m => (Array.isArray(m.genre) ? m.genre.includes(genreName) : m.genre === genreName));
-    if (startYear) list = list.filter(m => parseInt(m.year) >= parseInt(startYear));
-    if (endYear) list = list.filter(m => parseInt(m.year) <= parseInt(endYear));
+    // 按类型过滤
+    if (mainType) {
+      filteredMovies = filteredMovies.filter(movie => movie.mainType === mainType)
+    }
     
+    // 按题材过滤
+    if (typeName) {
+      filteredMovies = filteredMovies.filter(movie => 
+        Array.isArray(movie.type) 
+          ? movie.type.includes(typeName)
+          : movie.type === typeName
+      )
+    }
+    
+    // 按年份过滤
+    if (year) {
+      filteredMovies = filteredMovies.filter(movie => movie.year === year)
+    }
+    
+    // 排序
+    filteredMovies.sort((a, b) => {
+      if (sortBy === 'popularity') {
+        return b.popularity - a.popularity
+      }
+      return 0
+    })
+
     // 计算总页数
-    const totalPage = Math.ceil(list.length / pageSize);
+    const totalPage = Math.ceil(filteredMovies.length / pageSize)
     
     // 如果请求的页码超出范围，返回空数组
     if (page > totalPage) {
-      return { totalPage, movies: [] };
+      return { movies: [], totalPage }
     }
-    
-    // 获取当前页的数据
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize, list.length);
-    const movies = list.slice(startIndex, endIndex).map(m => ({
-      id: m.id,
-      title: m.title,
-      year: parseInt(m.year),
-      cover: m.cover,
-      mainType: m.mainType,
-      type: 0, // mock类型编号
-      genres: Array.isArray(m.genre) ? m.genre : [m.genre],
-      description: m.description,
-      popularity: m.popularity
-    }));
-    
-    return { totalPage, movies };
+
+    // 分页
+    const start = (page - 1) * pageSize
+    const end = start + pageSize
+    const paginatedMovies = filteredMovies.slice(start, end)
+
+    return { movies: paginatedMovies, totalPage }
   }
   
   // 真实API调用
   return fetch(`${API_BASE}/movie/page`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, page, pageSize, mainType, genreName, startYear, endYear }),
+    body: JSON.stringify({ page, pageSize, mainType, typeName, year }),
   }).then(res => res.json());
 }
 
@@ -143,7 +163,7 @@ export async function addMovie({ title, year, cover, description, type, genres }
       cover,
       description,
       mainType: type,
-      genre: genres,
+      type: genres,
       popularity: 0,
     };
     mockMovies.unshift(newMovie);
@@ -168,7 +188,7 @@ export async function getMovieDetail(id) {
       cover: m.cover,
       mainType: m.mainType,
       type: 0,
-      genres: Array.isArray(m.genre) ? m.genre : [m.genre],
+      genres: Array.isArray(m.type) ? m.type : [m.type],
       description: m.description,
       popularity: m.popularity,
     };

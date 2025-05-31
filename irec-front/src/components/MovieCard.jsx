@@ -25,11 +25,11 @@ export default function MovieCard({ movie }) {
         <div className="flex flex-col gap-2 mt-auto">
           {/* 题材标签 */}
           <div className="flex flex-wrap gap-2">
-            {Array.isArray(movie.genres)
-              ? movie.genres.map(g => (
-                  <span key={g} className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{g}</span>
+            {Array.isArray(movie.type)
+              ? movie.type.map(t => (
+                  <span key={t} className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{t}</span>
                 ))
-              : <span className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{movie.genres}</span>
+              : <span className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{movie.type}</span>
             }
           </div>
           {/* 年份标签 */}
