@@ -1,18 +1,28 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { getGenres } from '../lib/api'
+
 const mainTypes = [
   { label: '全部', value: '' },
   { label: '电影', value: 'movie' },
   { label: '番剧', value: 'bangumi' },
 ]
-const genres = [
-  { label: '全部', value: '' },
-  { label: '动作', value: 'action' },
-  { label: '剧情', value: 'drama' },
-  { label: '喜剧', value: 'comedy' },
-]
 
 export default function FilterBar({ filters, onChange }) {
+  const [genres, setGenres] = useState([])
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      const genreList = await getGenres()
+      setGenres([
+        { label: '全部', value: '' },
+        ...genreList.map(g => ({ label: g.name, value: g.name }))
+      ])
+    }
+    fetchGenres()
+  }, [])
+
   return (
     <div className="flex flex-col gap-6 p-0">
       <div className="flex flex-col gap-1">

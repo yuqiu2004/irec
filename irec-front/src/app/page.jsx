@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { getMovies } from '../lib/api'
 import MovieCard from '../components/MovieCard'
 import FilterBar from '../components/FilterBar'
@@ -52,21 +52,49 @@ function RankingList({ movies }) {
 export default function HomePage() {
   const [movies, setMovies] = useState([])
   const [filters, setFilters] = useState({ mainType: '', genre: '' })
+  const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+
+  const observer = useRef(null)
+
+  const fetchMovies = async (pageNum, currentFilters) => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const res = await getMovies({
+        page: pageNum,
+        pageSize: 10,
+        mainType: currentFilters.mainType,
+        genreName: currentFilters.genre,
+      });
+      if (res && Array.isArray(res.movies)) {
+        setMovies(prevMovies => [...prevMovies, ...res.movies]);
+        setHasMore(pageNum < res.totalPage);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+      setHasMore(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    getMovies({
-      page: 1,
-      pageSize: 100,
-      mainType: filters.mainType,
-      genreName: filters.genre,
-    }).then(res => {
-      let movies = [];
-      if (res && res.data && Array.isArray(res.data.movies)) {
-        movies = res.data.movies;
-      }
-      setMovies(movies);
-    })
-  }, [filters])
+    setMovies([]);
+    setPage(1);
+    setHasMore(true);
+  }, [filters]);
+
+  useEffect(() => {
+    if (page === 1) {
+      fetchMovies(1, filters);
+    } else if (page > 1 && hasMore) {
+      fetchMovies(page, filters);
+    }
+  }, [page, filters]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-bili-blue/10 via-pink-50 to-purple-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 relative overflow-x-hidden pt-12">
@@ -84,21 +112,37 @@ export default function HomePage() {
           </aside>
           <section className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-              {movies.map((movie) => (
-                <Link key={movie.id} href={`/movie/${movie.id}`} className="block h-full">
+              {movies.map((movie, index) => (
+                <Link key={movie.id} href={`/movie/${movie.id}`} className="block h-full movie-card-link">
                   <div className="relative group bg-white dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-full border border-blue-50 dark:border-gray-800">
                     <MovieCard movie={movie} />
                   </div>
                 </Link>
               ))}
             </div>
+            {loading && <div className="text-center py-4">Loading...</div>}
+            {!hasMore && movies.length > 0 && <div className="text-center py-4 text-gray-500">No more movies to load.</div>}
+            {hasMore && <div ref={el => {
+              if (el) {
+                if (observer.current) {
+                  observer.current.disconnect();
+                }
+                observer.current = new IntersectionObserver(entries => {
+                  if (entries[0].isIntersecting && hasMore && !loading) {
+                    setPage(prevPage => prevPage + 1);
+                  }
+                }, {
+                  rootMargin: '0px 0px 200px 0px',
+                });
+                observer.current.observe(el);
+              }
+            }} className="h-4" />}
           </section>
           <div className="hidden lg:block ml-4">
             <RankingList movies={mockMovies} />
           </div>
         </div>
       </main>
-      {/* 背景装饰 */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-pink-200/40 dark:bg-pink-900/30 rounded-full blur-3xl z-0" />
       <div className="absolute top-1/2 right-0 w-80 h-80 bg-blue-200/40 dark:bg-blue-900/30 rounded-full blur-2xl z-0" />
       <Link href="/add" className="fixed right-8 bottom-8 z-40 w-14 h-14 flex items-center justify-center rounded-full bg-bili-blue text-white text-3xl shadow-lg hover:bg-bili-blue-dark transition group" aria-label="添加作品">

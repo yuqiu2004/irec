@@ -2,7 +2,7 @@ export const mockMovies = [
   {
     id: '1',
     title: '无间道',
-    genre: ['action', 'drama'],
+    genre: ['动作', '剧情'],
     year: '2002',
     cover: 'https://picsum.photos/id/1011/300/200',
     description: '一部关于卧底和警匪的经典港片。',
@@ -12,7 +12,7 @@ export const mockMovies = [
   {
     id: '2',
     title: '喜剧之王',
-    genre: ['comedy'],
+    genre: ['喜剧'],
     year: '1999',
     cover: 'https://picsum.photos/id/1012/300/200',
     description: '周星驰的代表作，笑中带泪。',
@@ -22,7 +22,7 @@ export const mockMovies = [
   {
     id: '3',
     title: '霸王别姬',
-    genre: ['drama'],
+    genre: ['剧情'],
     year: '1993',
     cover: 'https://picsum.photos/id/1013/300/200',
     description: '张国荣主演的文艺巅峰之作。',
@@ -32,7 +32,7 @@ export const mockMovies = [
   {
     id: '4',
     title: '流浪地球',
-    genre: ['action', 'sci-fi'],
+    genre: ['动作', '科幻'],
     year: '2019',
     cover: 'https://picsum.photos/id/1015/300/200',
     description: '中国科幻电影的开山之作。',
@@ -42,7 +42,7 @@ export const mockMovies = [
   {
     id: '5',
     title: '哪吒之魔童降世',
-    genre: ['animation', 'fantasy'],
+    genre: ['动画', '奇幻'],
     year: '2019',
     cover: 'https://picsum.photos/id/1025/300/200',
     description: '国产动画电影巅峰，颠覆传统神话。',
@@ -52,7 +52,7 @@ export const mockMovies = [
   {
     id: '6',
     title: '功夫',
-    genre: ['action', 'comedy'],
+    genre: ['动作', '喜剧'],
     year: '2004',
     cover: 'https://picsum.photos/id/1035/300/200',
     description: '周星驰风格的武侠喜剧，笑点密集。',
@@ -62,7 +62,7 @@ export const mockMovies = [
   {
     id: '7',
     title: '大话西游之大圣娶亲',
-    genre: ['fantasy', 'romance'],
+    genre: ['奇幻', '爱情'],
     year: '1995',
     cover: 'https://picsum.photos/id/1040/300/200',
     description: '一段充满哲理的爱情故事。',
@@ -72,7 +72,7 @@ export const mockMovies = [
   {
     id: '8',
     title: '三体',
-    genre: ['sci-fi', 'drama'],
+    genre: ['科幻', '剧情'],
     year: '2023',
     cover: 'https://picsum.photos/id/1050/300/200',
     description: '改编自刘慈欣小说的宏大科幻剧。',
@@ -82,7 +82,7 @@ export const mockMovies = [
   {
     id: '9',
     title: '人生大事',
-    genre: ['drama'],
+    genre: ['剧情'],
     year: '2022',
     cover: 'https://picsum.photos/id/1060/300/200',
     description: '聚焦殡葬题材，充满人情味的电影。',
@@ -92,7 +92,7 @@ export const mockMovies = [
   {
     id: '10',
     title: '隐入尘烟',
-    genre: ['drama'],
+    genre: ['剧情'],
     year: '2022',
     cover: 'https://picsum.photos/id/1061/300/200',
     description: '讲述边缘农村人物命运的现实主义佳作。',
@@ -102,7 +102,7 @@ export const mockMovies = [
   {
     id: '11',
     title: '战狼2',
-    genre: ['action'],
+    genre: ['动作'],
     year: '2017',
     cover: 'https://picsum.photos/id/1062/300/200',
     description: '中国电影票房历史新高。',
@@ -112,7 +112,7 @@ export const mockMovies = [
   {
     id: '12',
     title: '唐人街探案',
-    genre: ['comedy', 'mystery'],
+    genre: ['喜剧', '悬疑'],
     year: '2015',
     cover: 'https://picsum.photos/id/1063/300/200',
     description: '烧脑又好笑的推理电影。',
@@ -122,7 +122,7 @@ export const mockMovies = [
   {
     id: '13',
     title: '千与千寻',
-    genre: ['animation', 'fantasy'],
+    genre: ['动画', '奇幻'],
     year: '2001',
     cover: 'https://picsum.photos/id/1064/300/200',
     description: '宫崎骏不朽的动画名作。',
@@ -132,7 +132,7 @@ export const mockMovies = [
   {
     id: '14',
     title: '你的名字',
-    genre: ['animation', 'romance'],
+    genre: ['动画', '爱情'],
     year: '2016',
     cover: 'https://picsum.photos/id/1065/300/200',
     description: '唯美画风与时空交错的爱情故事。',
@@ -142,7 +142,7 @@ export const mockMovies = [
   {
     id: '15',
     title: '阿凡达',
-    genre: ['sci-fi', 'adventure'],
+    genre: ['科幻', '冒险'],
     year: '2009',
     cover: 'https://picsum.photos/id/1066/300/200',
     description: '开创3D电影新纪元。',
@@ -152,7 +152,7 @@ export const mockMovies = [
   {
     id: '16',
     title: '盗梦空间',
-    genre: ['sci-fi', 'thriller'],
+    genre: ['科幻', '惊悚'],
     year: '2010',
     cover: 'https://picsum.photos/id/1067/300/200',
     description: '诺兰代表作，梦境与现实交织。',
@@ -162,7 +162,7 @@ export const mockMovies = [
   {
     id: '17',
     title: '黑客帝国',
-    genre: ['sci-fi', 'action'],
+    genre: ['科幻', '动作'],
     year: '1999',
     cover: 'https://picsum.photos/id/1068/300/200',
     description: '重新定义科幻动作电影。',
@@ -172,7 +172,7 @@ export const mockMovies = [
   {
     id: '18',
     title: '泰坦尼克号',
-    genre: ['romance', 'drama'],
+    genre: ['爱情', '剧情'],
     year: '1997',
     cover: 'https://picsum.photos/id/1069/300/200',
     description: '史诗爱情经典。',
@@ -182,7 +182,7 @@ export const mockMovies = [
   {
     id: '19',
     title: '楚门的世界',
-    genre: ['drama', 'sci-fi'],
+    genre: ['剧情', '科幻'],
     year: '1998',
     cover: 'https://picsum.photos/id/1070/300/200',
     description: '当人生成为一场直播。',
@@ -192,7 +192,7 @@ export const mockMovies = [
   {
     id: '20',
     title: '放牛班的春天',
-    genre: ['drama'],
+    genre: ['剧情'],
     year: '2004',
     cover: 'https://picsum.photos/id/1071/300/200',
     description: '音乐改变命运的感人故事。',
@@ -202,7 +202,7 @@ export const mockMovies = [
   {
     id: '21',
     title: '海边的曼彻斯特',
-    genre: ['drama'],
+    genre: ['剧情'],
     year: '2016',
     cover: 'https://picsum.photos/id/1072/300/200',
     description: '失落与救赎的故事。',
@@ -212,7 +212,7 @@ export const mockMovies = [
   {
     id: '22',
     title: '疯狂动物城',
-    genre: ['animation', 'comedy'],
+    genre: ['动画', '喜剧'],
     year: '2016',
     cover: 'https://picsum.photos/id/1073/300/200',
     description: '寓教于乐的动物世界。',
@@ -222,7 +222,7 @@ export const mockMovies = [
   {
     id: '23',
     title: '冰雪奇缘',
-    genre: ['animation', 'musical'],
+    genre: ['动画', '音乐'],
     year: '2013',
     cover: 'https://picsum.photos/id/1074/300/200',
     description: '席卷全球的迪士尼动画巨作。',
@@ -232,7 +232,7 @@ export const mockMovies = [
   {
     id: '24',
     title: '肖申克的救赎',
-    genre: ['drama'],
+    genre: ['剧情'],
     year: '1994',
     cover: 'https://picsum.photos/id/1075/300/200',
     description: '信念与自由的传世佳作。',
@@ -242,7 +242,7 @@ export const mockMovies = [
   {
     id: '25',
     title: '这个杀手不太冷',
-    genre: ['action', 'drama'],
+    genre: ['动作', '剧情'],
     year: '1994',
     cover: 'https://picsum.photos/id/1076/300/200',
     description: '温情与杀戮并存的经典。',
@@ -252,7 +252,7 @@ export const mockMovies = [
   {
     id: '26',
     title: '夏洛特烦恼',
-    genre: ['comedy', 'fantasy'],
+    genre: ['喜剧', '奇幻'],
     year: '2015',
     cover: 'https://picsum.photos/id/1036/300/200',
     description: '一场意外让人回到过去重新选择人生。',
@@ -262,7 +262,7 @@ export const mockMovies = [
   {
     id: '27',
     title: '摔跤吧！爸爸',
-    genre: ['drama', 'sports'],
+    genre: ['剧情', '体育'],
     year: '2016',
     cover: 'https://picsum.photos/id/1037/300/200',
     description: '父女情深与女性励志的结合。',
@@ -272,7 +272,7 @@ export const mockMovies = [
   {
     id: '28',
     title: '寻梦环游记',
-    genre: ['animation', 'adventure'],
+    genre: ['动画', '冒险'],
     year: '2017',
     cover: 'https://picsum.photos/id/1038/300/200',
     description: '音乐与亲情交织的感人故事。',
@@ -282,7 +282,7 @@ export const mockMovies = [
   {
     id: '29',
     title: '速度与激情7',
-    genre: ['action', 'crime'],
+    genre: ['动作', '犯罪'],
     year: '2015',
     cover: 'https://picsum.photos/id/1039/300/200',
     description: '家人永远是最重要的。',
@@ -292,7 +292,7 @@ export const mockMovies = [
   {
     id: '30',
     title: '绿皮书',
-    genre: ['drama', 'biography'],
+    genre: ['剧情', '传记'],
     year: '2018',
     cover: 'https://picsum.photos/id/1040/300/200',
     description: '跨越种族的深厚友情。',
@@ -302,7 +302,7 @@ export const mockMovies = [
   {
     id: '31',
     title: '头号玩家',
-    genre: ['sci-fi', 'action'],
+    genre: ['科幻', '动作'],
     year: '2018',
     cover: 'https://picsum.photos/id/1041/300/200',
     description: '虚拟现实世界的大冒险。',
@@ -312,7 +312,7 @@ export const mockMovies = [
   {
     id: '32',
     title: '阿凡达',
-    genre: ['sci-fi', 'adventure'],
+    genre: ['科幻', '冒险'],
     year: '2009',
     cover: 'https://picsum.photos/id/1042/300/200',
     description: '视觉特效的革命之作。',
@@ -322,7 +322,7 @@ export const mockMovies = [
   {
     id: '33',
     title: '泰坦尼克号',
-    genre: ['romance', 'drama'],
+    genre: ['爱情', '剧情'],
     year: '1997',
     cover: 'https://picsum.photos/id/1043/300/200',
     description: '永恒的爱情经典。',
@@ -332,7 +332,7 @@ export const mockMovies = [
   {
     id: '34',
     title: '阿甘正传',
-    genre: ['drama', 'biography'],
+    genre: ['剧情', '传记'],
     year: '1994',
     cover: 'https://picsum.photos/id/1044/300/200',
     description: '笨蛋也能改变世界。',
@@ -342,7 +342,7 @@ export const mockMovies = [
   {
     id: '35',
     title: '狮子王',
-    genre: ['animation', 'adventure'],
+    genre: ['动画', '冒险'],
     year: '1994',
     cover: 'https://picsum.photos/id/1045/300/200',
     description: '迪士尼不朽的成长寓言。',
@@ -352,7 +352,7 @@ export const mockMovies = [
   {
     id: '36',
     title: '驯龙高手',
-    genre: ['animation', 'fantasy'],
+    genre: ['动画', '奇幻'],
     year: '2010',
     cover: 'https://picsum.photos/id/1046/300/200',
     description: '人与龙之间的温情故事。',
@@ -362,7 +362,7 @@ export const mockMovies = [
   {
     id: '37',
     title: '冰雪奇缘',
-    genre: ['animation', 'musical'],
+    genre: ['动画', '音乐'],
     year: '2013',
     cover: 'https://picsum.photos/id/1047/300/200',
     description: 'Let it go~ 的奇幻冒险。',
@@ -372,7 +372,7 @@ export const mockMovies = [
   {
     id: '38',
     title: '神偷奶爸',
-    genre: ['animation', 'comedy'],
+    genre: ['动画', '喜剧'],
     year: '2010',
     cover: 'https://picsum.photos/id/1048/300/200',
     description: '坏蛋变奶爸，暖心又搞笑。',
@@ -382,7 +382,7 @@ export const mockMovies = [
   {
     id: '39',
     title: '爱乐之城',
-    genre: ['romance', 'music'],
+    genre: ['爱情', '音乐'],
     year: '2016',
     cover: 'https://picsum.photos/id/1049/300/200',
     description: '一段遗憾而美丽的爱情梦。',
@@ -392,7 +392,7 @@ export const mockMovies = [
   {
     id: '40',
     title: '速度与激情9',
-    genre: ['action', 'thriller'],
+    genre: ['动作', '惊悚'],
     year: '2021',
     cover: 'https://picsum.photos/id/1050/300/200',
     description: '家族仍在继续狂飙。',
@@ -402,7 +402,7 @@ export const mockMovies = [
   {
     id: '41',
     title: '钢铁侠',
-    genre: ['action', 'sci-fi'],
+    genre: ['动作', '科幻'],
     year: '2008',
     cover: 'https://picsum.photos/id/1051/300/200',
     description: '漫威宇宙的起点。',
@@ -412,7 +412,7 @@ export const mockMovies = [
   {
     id: '42',
     title: '复仇者联盟4',
-    genre: ['action', 'sci-fi'],
+    genre: ['动作', '科幻'],
     year: '2019',
     cover: 'https://picsum.photos/id/1052/300/200',
     description: '终局之战，致敬十年。',
@@ -422,7 +422,7 @@ export const mockMovies = [
   {
     id: '43',
     title: '海边的曼彻斯特',
-    genre: ['drama'],
+    genre: ['剧情'],
     year: '2016',
     cover: 'https://picsum.photos/id/1053/300/200',
     description: '抚平内心伤痛的旅程。',
@@ -432,7 +432,7 @@ export const mockMovies = [
   {
     id: '44',
     title: '调音师',
-    genre: ['thriller', 'comedy'],
+    genre: ['惊悚', '喜剧'],
     year: '2018',
     cover: 'https://picsum.photos/id/1054/300/200',
     description: '局中局中的局。',
@@ -442,7 +442,7 @@ export const mockMovies = [
   {
     id: '45',
     title: '海王',
-    genre: ['action', 'fantasy'],
+    genre: ['动作', '奇幻'],
     year: '2018',
     cover: 'https://picsum.photos/id/1055/300/200',
     description: '海底王国的传奇英雄。',
@@ -452,7 +452,7 @@ export const mockMovies = [
   {
     id: '46',
     title: '蜘蛛侠：平行宇宙',
-    genre: ['animation', 'sci-fi'],
+    genre: ['动画', '科幻'],
     year: '2018',
     cover: 'https://picsum.photos/id/1056/300/200',
     description: '多元宇宙的视觉革命。',
@@ -462,7 +462,7 @@ export const mockMovies = [
   {
     id: '47',
     title: '瞬息全宇宙',
-    genre: ['sci-fi', 'action'],
+    genre: ['科幻', '动作'],
     year: '2022',
     cover: 'https://picsum.photos/id/1057/300/200',
     description: '疯狂跨宇宙之旅。',
@@ -472,7 +472,7 @@ export const mockMovies = [
   {
     id: '48',
     title: '信条',
-    genre: ['sci-fi', 'thriller'],
+    genre: ['科幻', '惊悚'],
     year: '2020',
     cover: 'https://picsum.photos/id/1058/300/200',
     description: '时间的正逆熵操作。',
@@ -482,7 +482,7 @@ export const mockMovies = [
   {
     id: '49',
     title: '寄生虫',
-    genre: ['thriller', 'drama'],
+    genre: ['惊悚', '剧情'],
     year: '2019',
     cover: 'https://picsum.photos/id/1059/300/200',
     description: '贫富之间的生存较量。',
@@ -492,7 +492,7 @@ export const mockMovies = [
   {
     id: '50',
     title: '小丑',
-    genre: ['drama', 'crime'],
+    genre: ['剧情', '犯罪'],
     year: '2019',
     cover: 'https://picsum.photos/id/1060/300/200',
     description: '边缘人的悲剧史诗。',
