@@ -50,16 +50,23 @@ function RankingList({ movies }) {
 
 export default function HomePage() {
   const [movies, setMovies] = useState([])
-  const [filters, setFilters] = useState({ type: '', genreName: '', startYear: '0', endYear: '9999' })
+  const [filters, setFilters] = useState({
+    type: '',
+    genreName: '',
+    startYear: '1900',
+    endYear: '2100'
+  })
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
+  const [error, setError] = useState('')
   const [rankingMovies, setRankingMovies] = useState([])
   const observer = useRef(null)
 
   const fetchMovies = async (pageNum, currentFilters) => {
     if (loading) return;
     setLoading(true);
+    setError('');
     try {
       const res = await getMovies({
         page: pageNum,
@@ -70,18 +77,30 @@ export default function HomePage() {
         endYear: currentFilters.endYear
       });
       if (res && Array.isArray(res.data.movies)) {
-        setMovies(prevMovies => [...prevMovies, ...res.data.movies]);
-        setHasMore(pageNum*10 < res.data.totalPage);
+        setMovies(prevMovies => pageNum === 1 ? res.data.movies : [...prevMovies, ...res.data.movies]);
+        setHasMore(pageNum * 10 < res.data.totalPage);
       } else {
         setHasMore(false);
+        setError('获取数据失败，请稍后重试');
       }
     } catch (error) {
       console.error("Error fetching movies:", error);
       setHasMore(false);
+      setError('加载失败，请稍后重试');
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      setMovies([]);
+      setPage(1);
+      setHasMore(true);
+      await fetchMovies(1, filters);
+    };
+    fetchInitialData();
+  }, [filters]);
 
   useEffect(() => {
     const fetchTop10 = async () => {
@@ -96,18 +115,10 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    setMovies([]);
-    setPage(1);
-    setHasMore(true);
-  }, [filters]);
-
-  useEffect(() => {
-    if (page === 1) {
-      fetchMovies(1, filters);
-    } else if (page > 1 && hasMore) {
+    if (page > 1 && hasMore) {
       fetchMovies(page, filters);
     }
-  }, [page, filters]);
+  }, [page]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-bili-blue/10 via-pink-50 to-purple-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 relative overflow-x-hidden pt-12">
@@ -124,6 +135,11 @@ export default function HomePage() {
             <FilterBar filters={filters} onChange={setFilters} />
           </aside>
           <section className="flex-1">
+            {error && (
+              <div className="text-center py-4 text-red-500 bg-red-50 dark:bg-red-900/20 rounded-lg mb-4">
+                {error}
+              </div>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
               {movies.map((movie, index) => (
                 <Link key={movie.id} href={`/movie/${movie.id}`} className="block h-full movie-card-link">
@@ -133,23 +149,42 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
-            {loading && <div className="text-center py-4">Loading...</div>}
-            {!hasMore && movies.length > 0 && <div className="text-center py-4 text-gray-500">No more movies to load.</div>}
-            {hasMore && <div ref={el => {
-              if (el) {
-                if (observer.current) {
-                  observer.current.disconnect();
-                }
-                observer.current = new IntersectionObserver(entries => {
-                  if (entries[0].isIntersecting && hasMore && !loading) {
-                    setPage(prevPage => prevPage + 1);
+            {loading && (
+              <div className="text-center py-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-bili-blue mx-auto"></div>
+                <p className="mt-2 text-gray-500">加载中...</p>
+              </div>
+            )}
+            {!hasMore && movies.length > 0 && (
+              <div className="text-center py-4 text-gray-500">
+                没有更多电影了
+              </div>
+            )}
+            {!loading && movies.length === 0 && !error && (
+              <div className="text-center py-8 text-gray-500">
+                没有找到符合条件的电影
+              </div>
+            )}
+            {hasMore && (
+              <div
+                ref={el => {
+                  if (el) {
+                    if (observer.current) {
+                      observer.current.disconnect();
+                    }
+                    observer.current = new IntersectionObserver(entries => {
+                      if (entries[0].isIntersecting && hasMore && !loading) {
+                        setPage(prevPage => prevPage + 1);
+                      }
+                    }, {
+                      rootMargin: '0px 0px 200px 0px',
+                    });
+                    observer.current.observe(el);
                   }
-                }, {
-                  rootMargin: '0px 0px 200px 0px',
-                });
-                observer.current.observe(el);
-              }
-            }} className="h-4" />}
+                }}
+                className="h-4"
+              />
+            )}
           </section>
           <div className="hidden lg:block ml-4">
             <RankingList movies={rankingMovies} />
