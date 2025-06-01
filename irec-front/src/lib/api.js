@@ -39,11 +39,11 @@ export async function getTop10() {
 }
 
 // 新增电影
-export async function addMovie({ title, year, cover, description, type, genres }) {
+export async function addMovie({ title, year, cover, description, type, genres, uploadCode }) {
   return fetch(`${API_BASE}/movie`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title, year, cover, description, type, genres }),
+    body: JSON.stringify({ title, year, cover, description, type, genres, uploadCode }),
   }).then(res => res.json());
 }
 

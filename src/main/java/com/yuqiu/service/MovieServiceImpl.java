@@ -71,7 +71,6 @@ public class MovieServiceImpl implements MovieService{
     public Boolean add(MovieDTO movieDTO) {
         Movie movie = new Movie();
         BeanUtil.copyProperties(movieDTO, movie);
-        movie.setType(MainTypeEnum.getCodeByName(movieDTO.getType()));
         movie.setPopularity(0);
         movieMapper.insert(movie);
         // 插入类别 多线程处理
