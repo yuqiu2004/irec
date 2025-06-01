@@ -6,7 +6,7 @@ export default function CommentList({ comments }) {
       {comments.map((comment) => (
         <div key={comment.id} className="border rounded-xl p-4 bg-white dark:bg-gray-900 shadow flex flex-col gap-2">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">{comment.user}</span>
+            <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">{comment.userName}</span>
             {/* 可扩展：时间 */}
             {comment.time && <span className="text-xs text-gray-400 ml-2">{comment.time}</span>}
           </div>
