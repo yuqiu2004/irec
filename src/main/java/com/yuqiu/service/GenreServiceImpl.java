@@ -19,7 +19,7 @@ public class GenreServiceImpl implements GenreService{
     public List<GenreVo> list() {
         // 从数据库查找种类最多的10种
         QueryWrapper<Genre> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("popularity").last("LIMIT 10");
+        wrapper.orderByDesc("count").last("LIMIT 10");
         List<Genre> list = genreMapper.selectList(wrapper);
         return list.stream()
                 .map(genre -> GenreVo.builder().name(genre.getName()).build())
