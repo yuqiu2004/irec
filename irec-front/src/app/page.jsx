@@ -85,7 +85,7 @@ export default function HomePage() {
     const fetchTop10 = async () => {
       try {
         const res = await getTop10();
-        setMovies(res.data);
+        setRankingMovies(res.data);
       } catch (error) {
         console.error("Error fetching top10:", error);
       }
