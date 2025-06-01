@@ -89,7 +89,7 @@ export default function FilterBar({ filters, onChange }) {
           <button
             key={t.key}
             className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition focus:outline-none
-              ${filters.type === (t.value === '全部' ? '' : t.value) ? 'bg-bili-blue text-white' : 'bg-transparent text-bili-blue hover:bg-bili-blue/10'}`}
+              ${filters.type === (t.value === '全部' ? '' : t.key) ? 'bg-bili-blue text-white' : 'bg-transparent text-bili-blue hover:bg-bili-blue/10'}`}
             style={{border: 'none', boxShadow: 'none'}}
             onClick={() => {
               const newType = t.value === '全部' ? '' : t.key;
