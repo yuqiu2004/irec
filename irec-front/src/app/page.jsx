@@ -67,9 +67,9 @@ export default function HomePage() {
         mainType: currentFilters.mainType,
         typeName: currentFilters.type,
       });
-      if (res && Array.isArray(res.movies)) {
-        setMovies(prevMovies => [...prevMovies, ...res.movies]);
-        setHasMore(pageNum < res.totalPage);
+      if (res && Array.isArray(res.data.movies)) {
+        setMovies(prevMovies => [...prevMovies, ...res.data.movies]);
+        setHasMore(pageNum < res.data.totalPage);
       } else {
         setHasMore(false);
       }
