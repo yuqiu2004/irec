@@ -1,11 +1,10 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { getMovies } from '../lib/api'
+import { getMovies, getTop10 } from '../lib/api'
 import MovieCard from '../components/MovieCard'
 import FilterBar from '../components/FilterBar'
 import Link from 'next/link'
-import { mockMovies } from '../lib/mockData'
 
 function ThemeToggle() {
   const [dark, setDark] = useState(false)
@@ -55,7 +54,7 @@ export default function HomePage() {
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
-
+  const [rankingMovies, setRankingMovies] = useState([])
   const observer = useRef(null)
 
   const fetchMovies = async (pageNum, currentFilters) => {
@@ -81,6 +80,18 @@ export default function HomePage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchTop10 = async () => {
+      try {
+        const res = await getTop10();
+        setMovies(res.data);
+      } catch (error) {
+        console.error("Error fetching top10:", error);
+      }
+    };
+    fetchTop10();
+  }, []);
 
   useEffect(() => {
     setMovies([]);
@@ -139,7 +150,7 @@ export default function HomePage() {
             }} className="h-4" />}
           </section>
           <div className="hidden lg:block ml-4">
-            <RankingList movies={mockMovies} />
+            <RankingList movies={rankingMovies} />
           </div>
         </div>
       </main>
