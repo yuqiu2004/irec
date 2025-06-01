@@ -49,9 +49,7 @@ public class MovieServiceImpl implements MovieService{
         List<MovieVo> list = movieMapper.pageQuery(page, pageSize, genreName, type, startYear, endYear);
         return MoviePageVo.builder()
                 .totalPage(totalPage)
-                .movies(list.stream()
-                        .peek(movie -> movie.setMainType(MainTypeEnum.getNameFromCode(movie.getType())))
-                        .toList())
+                .movies(list)
                 .build();
     }
 
