@@ -1,16 +1,24 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getGenres } from '../lib/api'
-
-const mainTypes = [
-  { label: '全部', value: '' },
-  { label: '电影', value: 'movie' },
-  { label: '番剧', value: 'bangumi' },
-]
+import { getGenres, getTypes } from '../lib/api'
 
 export default function FilterBar({ filters, onChange }) {
   const [genres, setGenres] = useState([])
+  const [types, setTypes] = useState([])
+
+  useEffect(() => {
+    const fetchTypes = async () => {
+      try {
+        const res = await getTypes();
+        const typesList = res.data;
+        setTypes(typesList)
+      } catch (error) {
+        console.error("Error fetching type:", error)
+      }
+    }
+    fetchTypes()
+  }, [])
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -33,15 +41,15 @@ export default function FilterBar({ filters, onChange }) {
     <div className="flex flex-col gap-6 p-0">
       <div className="flex flex-col gap-1">
         <div className="text-[11px] text-gray-400 mb-1 pl-1 tracking-wide">类型</div>
-        {mainTypes.map(t => (
+        {types.map(t => (
           <button
-            key={t.value}
+            key={t.key}
             className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition focus:outline-none
               ${filters.mainType === t.value ? 'bg-bili-blue text-white' : 'bg-transparent text-bili-blue hover:bg-bili-blue/10'}`}
             style={{border: 'none', boxShadow: 'none'}}
             onClick={() => onChange({ ...filters, mainType: t.value })}
           >
-            {t.label}
+            {t.value}
           </button>
         ))}
       </div>

@@ -1,15 +1,15 @@
 package com.yuqiu.constant;
 
 public enum MainTypeEnum {
-    EMPTY(0, ""),
+    EMPTY(0, "全部"),
     MOVIE(1, "电影"),
     BANGUMI(2, "番剧");
 
-    final int no;
-    final String name;
+    public final Integer no;
+    public final String name;
 
-    MainTypeEnum(int i, String name) {
-        this.no = i;
+    MainTypeEnum(int no, String name) {
+        this.no = no;
         this.name = name;
     }
 
@@ -22,7 +22,7 @@ public enum MainTypeEnum {
 
     public static String getNameFromCode(Integer type) {
         for (MainTypeEnum value : values()) {
-            if (value.no == type) return value.name;
+            if (value.no.equals(type)) return value.name;
         }
         return EMPTY.name;
     }

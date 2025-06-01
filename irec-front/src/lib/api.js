@@ -51,3 +51,8 @@ export async function addMovie({ title, year, cover, description, type, genres }
 export async function getMovieDetail(id) {
   return fetch(`${API_BASE}/movie/${id}`).then(res => res.json());
 } 
+
+// 获取分类信息
+export async function getTypes() {
+  return fetch(`${API_BASE}/type`).then(res => res.json());
+}

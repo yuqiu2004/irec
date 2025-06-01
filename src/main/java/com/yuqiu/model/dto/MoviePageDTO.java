@@ -7,7 +7,7 @@ public class MoviePageDTO {
     private int id;
     private int page;
     private int pageSize;
-    private String mainType;
+    private Integer type;
     private String genreName;
     private int startYear;
     private int endYear;
