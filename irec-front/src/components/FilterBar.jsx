@@ -14,13 +14,19 @@ export default function FilterBar({ filters, onChange }) {
 
   useEffect(() => {
     const fetchGenres = async () => {
-      const genreList = await getGenres()
-      setGenres([
-        { label: '全部', value: '' },
-        ...genreList.map(g => ({ label: g.name, value: g.name }))
-      ])
-    }
-    fetchGenres()
+      try {
+        const response = await getGenres();
+        const genreList = response.data;
+        setGenres([
+          { label: '全部', value: '' },
+          ...genreList.map(g => ({ label: g.name, value: g.name }))
+        ]);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+        setGenres([{ label: '全部', value: '' }]);
+      }
+    };
+    fetchGenres();
   }, [])
 
   return (

@@ -1,4 +1,4 @@
-export const USE_MOCK = true; // 切换mock/接口
+export const USE_MOCK = false; // 切换mock/接口
 export const API_BASE = USE_MOCK ? '' : 'http://localhost:8080'; // 后端基础路径，接口模式下请改成你的后端地址
 
 import { mockMovies, mockComments } from './mockData';
