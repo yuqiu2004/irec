@@ -50,7 +50,7 @@ function RankingList({ movies }) {
 
 export default function HomePage() {
   const [movies, setMovies] = useState([])
-  const [filters, setFilters] = useState({ mainType: '', type: '' })
+  const [filters, setFilters] = useState({ type: '', genreName: '', startYear: '0', endYear: '9999' })
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
@@ -64,12 +64,14 @@ export default function HomePage() {
       const res = await getMovies({
         page: pageNum,
         pageSize: 10,
-        mainType: currentFilters.mainType,
-        typeName: currentFilters.type,
+        type: currentFilters.type,
+        genreName: currentFilters.genreName,
+        startYear: currentFilters.startYear,
+        endYear: currentFilters.endYear
       });
       if (res && Array.isArray(res.data.movies)) {
         setMovies(prevMovies => [...prevMovies, ...res.data.movies]);
-        setHasMore(pageNum < res.data.totalPage);
+        setHasMore(pageNum*10 < res.data.totalPage);
       } else {
         setHasMore(false);
       }

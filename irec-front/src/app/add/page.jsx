@@ -8,7 +8,7 @@ const UPLOAD_CODE = '123456' // 可自定义
 export default function AddMoviePage() {
   const [form, setForm] = useState({
     title: '',
-    mainType: '',
+    type: '',
     genre: '',
     year: '',
     cover: '',
@@ -42,7 +42,7 @@ export default function AddMoviePage() {
         <h2 className="text-2xl font-bold mb-6 text-center text-bili-blue">添加作品</h2>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input name="title" value={form.title} onChange={handleChange} placeholder="标题" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
-          <input name="mainType" value={form.mainType} onChange={handleChange} placeholder="主类型（如 movie/bangumi）" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
+          <input name="type" value={form.type} onChange={handleChange} placeholder="主类型（如 movie/bangumi）" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
           <input name="genre" value={form.genre} onChange={handleChange} placeholder="题材（多个用英文逗号分隔）" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
           <input name="year" value={form.year} onChange={handleChange} placeholder="年份" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />
           <input name="cover" value={form.cover} onChange={handleChange} placeholder="封面图片URL" className="w-full px-4 py-2 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none" required />

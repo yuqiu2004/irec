@@ -45,9 +45,9 @@ export default function FilterBar({ filters, onChange }) {
           <button
             key={t.key}
             className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition focus:outline-none
-              ${filters.mainType === t.value ? 'bg-bili-blue text-white' : 'bg-transparent text-bili-blue hover:bg-bili-blue/10'}`}
+              ${filters.type === t.value ? 'bg-bili-blue text-white' : 'bg-transparent text-bili-blue hover:bg-bili-blue/10'}`}
             style={{border: 'none', boxShadow: 'none'}}
-            onClick={() => onChange({ ...filters, mainType: t.value })}
+            onClick={() => onChange({ ...filters, type: t.value })}
           >
             {t.value}
           </button>
@@ -74,8 +74,8 @@ export default function FilterBar({ filters, onChange }) {
             type="number"
             placeholder="起始年份"
             className="w-1/2 px-3 py-1.5 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none text-sm"
-            value={filters.yearStart || ''}
-            onChange={e => onChange({ ...filters, yearStart: e.target.value })}
+            value={filters.startYear || ''}
+            onChange={e => onChange({ ...filters, startYear: e.target.value })}
             min="1900"
             max="2100"
           />
@@ -84,8 +84,8 @@ export default function FilterBar({ filters, onChange }) {
             type="number"
             placeholder="结束年份"
             className="w-1/2 px-3 py-1.5 rounded border border-blue-100 dark:border-gray-700 focus:ring-2 focus:ring-bili-blue outline-none text-sm"
-            value={filters.yearEnd || ''}
-            onChange={e => onChange({ ...filters, yearEnd: e.target.value })}
+            value={filters.endYear || ''}
+            onChange={e => onChange({ ...filters, endYear: e.target.value })}
             min="1900"
             max="2100"
           />

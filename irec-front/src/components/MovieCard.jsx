@@ -11,13 +11,6 @@ export default function MovieCard({ movie }) {
           alt={movie.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {/* 评分角标 */}
-        {movie.rating && (
-          <span className="absolute top-2 left-2 bg-bili-blue text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">
-            <svg width="14" height="14" fill="currentColor" className="inline -mt-0.5 mr-1"><polygon points="7,1 8.8,5.2 13.3,5.2 9.7,8.1 11.1,12.3 7,9.9 2.9,12.3 4.3,8.1 0.7,5.2 5.2,5.2"/></svg>
-            {movie.rating}
-          </span>
-        )}
       </div>
       <div className="flex-1 flex flex-col gap-2 p-4">
         <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 line-clamp-2 min-h-[2.5em]">{movie.title}</h3>
@@ -25,11 +18,11 @@ export default function MovieCard({ movie }) {
         <div className="flex flex-col gap-2 mt-auto">
           {/* 题材标签 */}
           <div className="flex flex-wrap gap-2">
-            {Array.isArray(movie.type)
-              ? movie.type.map(t => (
+            {movie.genres
+              ? movie.genres.split(',').map(t => (
                   <span key={t} className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{t}</span>
                 ))
-              : <span className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{movie.type}</span>
+              : <span className="px-2 py-0.5 bg-bili-blue/10 text-bili-blue rounded-full text-xs font-semibold">{movie.genres}</span>
             }
           </div>
           {/* 年份标签 */}

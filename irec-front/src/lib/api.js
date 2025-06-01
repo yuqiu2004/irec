@@ -25,11 +25,11 @@ export async function postComment(movieId, userName, text) {
 }
 
 // 分页获取电影
-export async function getMovies({ page = 1, pageSize = 10, mainType, typeName, year, sortBy = 'popularity' } = {}) {
+export async function getMovies({ page = 1, pageSize = 10, type, genreName, startYear, endYear } = {}) {
   return fetch(`${API_BASE}/movie/page`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ page, pageSize, mainType, typeName, year }),
+    body: JSON.stringify({ page, pageSize, type, genreName, startYear, endYear }),
   }).then(res => res.json());
 }
 
