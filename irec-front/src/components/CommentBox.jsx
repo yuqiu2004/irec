@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { postComment } from '../lib/api'
+import { postComment } from '@/lib/api'
 
 export default function CommentBox({ movieId }) {
   const [text, setText] = useState('')

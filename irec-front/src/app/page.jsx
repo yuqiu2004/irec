@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { getMovies, getTop10 } from '../lib/api'
+import { getMovies, getTop10 } from '@/lib/api'
 import MovieCard from '../components/MovieCard'
 import FilterBar from '../components/FilterBar'
 import Link from 'next/link'

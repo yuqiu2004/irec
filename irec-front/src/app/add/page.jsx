@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { addMovie, getTypes } from '../../lib/api' // Corrected import path and added getTypes API
+import { addMovie, getTypes } from '@/lib/api' // Corrected import path and added getTypes API
 
 // const UPLOAD_CODE = '123456' // 不再需要在前端硬编码上传码
 

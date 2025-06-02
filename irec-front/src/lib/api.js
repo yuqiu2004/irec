@@ -1,64 +1,81 @@
-const getBaseUrl = () => {
-  if (typeof window !== 'undefined') return '/api'; // 客户端使用相对路径
-  if (process.env.BACKEND_URL) return process.env.BACKEND_URL; // 服务器端使用完整 URL
-  return process.env.NODE_ENV === 'development' 
-    ? 'http://localhost:8080' 
-    : 'http://backend:8080';
-};
+const BASE_URL = '/api';
+
+////////////////////////////////////////////////////////////
+// 通用请求函数
+async function request(url, { method = 'GET', data, headers = {} } = {}) {
+  const config = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+  };
+
+  if (data) {
+    config.body = JSON.stringify(data);
+  }
+
+  const response = await fetch(`${BASE_URL}${url}`, config);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Request failed: ${response.status} ${errorText}`);
+  }
+
+  return response.json();
+}
+////////////////////////////////////////////////////////////
 
 // 获取所有类型
-export async function getGenres() {
-  return fetch(`${getBaseUrl()}/genre/list`).then(res => res.json());
+export function getGenres() {
+  return request('/genre/list');
 }
 
 // 按名称搜索类型
-export async function getGenreByName(name) {
-  return fetch(`${getBaseUrl()}/genre/${name}`).then(res => res.json());
+export function getGenreByName(name) {
+  return request(`/genre/${name}`);
 }
 
 // 获取某电影所有评论
-export async function getComments(movieId) {
-  return fetch(`${getBaseUrl()}/comment/${movieId}`).then(res => res.json());
+export function getComments(movieId) {
+  return request(`/comment/${movieId}`);
 }
 
 // 新增评论
-export async function postComment(movieId, userName, text) {
-  return fetch(`${getBaseUrl()}/comment`, {
+export function postComment(movieId, userName, text) {
+  return request('/comment', {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ movieId, userName, text }),
-  }).then(res => res.json());
+    data: { movieId, userName, text },
+  });
 }
 
 // 分页获取电影
-export async function getMovies({ page = 1, pageSize = 10, type, genreName, startYear, endYear } = {}) {
-  return fetch(`${getBaseUrl()}/movie/page`, {
+export function getMovies({ page = 1, pageSize = 10, type, genreName, startYear, endYear } = {}) {
+  return request('/movie/page', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ page, pageSize, type, genreName, startYear, endYear }),
-  }).then(res => res.json());
+    data: { page, pageSize, type, genreName, startYear, endYear },
+  });
 }
 
 // 获取电影Top10
-export async function getTop10() {
-  return fetch(`${getBaseUrl()}/movie/top10`).then(res => res.json());
+export function getTop10() {
+  return request('/movie/top10');
 }
 
 // 新增电影
-export async function addMovie({ title, year, cover, description, type, genres, uploadCode }) {
-  return fetch(`${getBaseUrl()}/movie`, {
+export function addMovie({ title, year, cover, description, type, genres, uploadCode }) {
+  return request('/movie', {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title, year, cover, description, type, genres, uploadCode }),
-  }).then(res => res.json());
+    data: { title, year, cover, description, type, genres, uploadCode },
+  });
 }
 
 // 获取电影详情
-export async function getMovieDetail(id) {
-  return fetch(`${getBaseUrl()}/movie/${id}`).then(res => res.json());
+export function getMovieDetail(id) {
+  return request(`/movie/${id}`);
 }
 
 // 获取分类信息
-export async function getTypes() {
-  return fetch(`${getBaseUrl()}/type`).then(res => res.json());
+export function getTypes() {
+  return request('/type');
 }

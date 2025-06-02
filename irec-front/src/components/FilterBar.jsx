@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getGenres, getTypes } from '../lib/api'
+import { getGenres, getTypes } from '@/lib/api'
 
 export default function FilterBar({ filters, onChange }) {
   const [genres, setGenres] = useState([])

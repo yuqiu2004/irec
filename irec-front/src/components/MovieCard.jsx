@@ -1,7 +1,5 @@
 'use client'
 
-import Link from 'next/link'
-
 export default function MovieCard({ movie }) {
   return (
     <div className="relative group bg-white dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-full border border-blue-50 dark:border-gray-800">
