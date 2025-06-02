@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql:8.0.31
     container_name: mysql
     restart: always
     environment:
@@ -33,7 +33,7 @@ services:
 
   frontend:
     build:
-      context: ./irec-frontend
+      context: ./irec-front
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_API_URL: http://backend:8080
