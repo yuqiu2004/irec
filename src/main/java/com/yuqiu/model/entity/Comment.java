@@ -1,5 +1,6 @@
 package com.yuqiu.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
     private String movieId;
     private String userName;
