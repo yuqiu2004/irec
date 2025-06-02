@@ -14,7 +14,6 @@ export default function MovieCard({ movie }) {
       </div>
       <div className="flex-1 flex flex-col gap-2 p-4">
         <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 line-clamp-2 min-h-[2.5em]">{movie.title}</h3>
-        <div className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 min-h-[2.5em]">{movie.description || '暂无简介'}</div>
         <div className="flex flex-col gap-2 mt-auto">
           {/* 题材标签 */}
           <div className="flex flex-wrap gap-2">
