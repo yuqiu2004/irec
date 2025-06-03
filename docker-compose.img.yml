@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0.31
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWD}
+      MYSQL_DATABASE: ${MYSQL_DB}
+    ports:
+      - "3306:3306"
+
+  backend:
+    image: irec-backend:latest
+    container_name: backend
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_USERNAME: ${MYSQL_USERNAME}
+      MYSQL_PASSWD: ${MYSQL_PASSWD}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: irec-frontend:latest
+    container_name: frontend
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8080
+    ports:
+      - "80:3000"
