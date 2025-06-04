@@ -1,0 +1,112 @@
+=== 压测开始 ===
+请求总数: 100
+并发线程数: 10
+目标地址: http://113.47.14.108:8080
+开始时间: 2025-06-04 22:24:07
+
+[Task 2] GET http://113.47.14.108:8080/movie/1 - Status: 200, Time: 31.25ms
+[Task 4] GET http://113.47.14.108:8080/movie/9 - Status: 200, Time: 31.25ms
+[Task 7] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 31.25ms
+[Task 5] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 31.25ms
+[Task 8] GET http://113.47.14.108:8080/movie/6 - Status: 200, Time: 31.25ms
+[Task 1] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 31.25ms
+[Task 3] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 31.25ms
+[Task 10] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 31.25ms
+[Task 6] GET http://113.47.14.108:8080/movie/8 - Status: 200, Time: 31.25ms
+[Task 9] GET http://113.47.14.108:8080/movie/9 - Status: 200, Time: 31.25ms
+[Task 11] GET http://113.47.14.108:8080/movie/4 - Status: 200, Time: 35.6ms
+[Task 19] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 71.67ms
+[Task 16] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 79.68ms
+[Task 20] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 64.05ms
+[Task 12] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 79.68ms
+[Task 14] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 79.68ms
+[Task 15] GET http://113.47.14.108:8080/movie/4 - Status: 200, Time: 79.68ms
+[Task 18] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 79.68ms
+[Task 17] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 79.68ms
+[Task 21] GET http://113.47.14.108:8080/movie/8 - Status: 200, Time: 44.08ms
+[Task 23] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 15.63ms
+[Task 24] GET http://113.47.14.108:8080/movie/5 - Status: 200, Time: 15.63ms
+[Task 26] GET http://113.47.14.108:8080/movie/6 - Status: 200, Time: 15.63ms
+[Task 25] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 31.26ms
+[Task 30] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 31.26ms
+[Task 29] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 31.26ms
+[Task 28] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 31.26ms
+
+[Task 31] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 15.63ms
+[Task 36] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 16.02ms
+[Task 37] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 16.02ms
+[Task 38] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 16.02ms
+[Task 32] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 31.64ms
+[Task 35] GET http://113.47.14.108:8080/movie/6 - Status: 200, Time: 47.27ms
+[Task 34] GET http://113.47.14.108:8080/movie/6 - Status: 200, Time: 47.27ms
+[Task 40] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 31.65ms
+[Task 41] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 31.65ms
+[Task 39] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 31.65ms
+[Task 42] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 31.26ms
+[Task 43] GET http://113.47.14.108:8080/movie/3 - Status: 200, Time: 31.26ms
+[Task 45] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 46.88ms
+[Task 44] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 46.88ms
+[Task 48] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 31.25ms
+[Task 46] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 46.88ms
+[Task 50] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 62.89ms
+[Task 49] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 62.89ms
+[Task 51] GET http://113.47.14.108:8080/movie/3 - Status: 200, Time: 62.89ms
+[Task 47] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 62.89ms
+[Task 52] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 47.27ms
+[Task 53] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 47.27ms
+[Task 55] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 42.16ms
+[Task 54] GET http://113.47.14.108:8080/movie/9 - Status: 200, Time: 49.13ms
+[Task 56] GET http://113.47.14.108:8080/movie/4 - Status: 200, Time: 49.13ms
+[Task 57] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 49.13ms
+[Task 60] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 33.61ms
+[Task 58] GET http://113.47.14.108:8080/movie/4 - Status: 200, Time: 33.61ms
+[Task 59] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 33.61ms
+[Task 63] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 33.61ms
+[Task 62] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 33.61ms
+[Task 61] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 33.61ms
+[Task 64] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 33.6ms
+[Task 65] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 29.65ms
+[Task 67] GET http://113.47.14.108:8080/movie/5 - Status: 200, Time: 45.28ms
+[Task 74] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 18.65ms
+[Task 69] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 44.78ms
+[Task 71] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 44.78ms
+[Task 66] GET http://113.47.14.108:8080/movie/6 - Status: 200, Time: 60.91ms
+[Task 75] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 31.26ms
+[Task 73] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 44.78ms
+[Task 70] GET http://113.47.14.108:8080/movie/1 - Status: 200, Time: 44.78ms
+[Task 72] GET http://113.47.14.108:8080/movie/2 - Status: 200, Time: 44.78ms
+[Task 68] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 44.78ms
+[Task 77] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 31.25ms
+[Task 76] GET http://113.47.14.108:8080/movie/3 - Status: 200, Time: 31.25ms
+[Task 79] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 15.62ms
+[Task 80] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 31.25ms
+[Task 84] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 31.25ms
+[Task 81] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 31.25ms
+[Task 83] GET http://113.47.14.108:8080/movie/6 - Status: 200, Time: 31.25ms
+[Task 82] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 31.25ms
+[Task 85] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 96.59ms
+[Task 94] GET http://113.47.14.108:8080/movie/2 - Status: 200, Time: 65.34ms
+[Task 86] GET http://113.47.14.108:8080/movie/top10 - Status: 200, Time: 80.97ms
+[Task 91] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 65.34ms
+[Task 89] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 65.34ms
+[Task 93] GET http://113.47.14.108:8080/movie/1 - Status: 200, Time: 65.34ms
+[Task 90] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 65.34ms
+[Task 87] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 80.97ms
+[Task 92] GET http://113.47.14.108:8080/movie/3 - Status: 200, Time: 65.34ms
+[Task 88] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 80.97ms
+[Task 95] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 61.7ms
+[Task 99] GET http://113.47.14.108:8080/genre/list - Status: 200, Time: 92.95ms
+[Task 97] GET http://113.47.14.108:8080/movie/2 - Status: 200, Time: 92.95ms
+[Task 100] GET http://113.47.14.108:8080/movie/8 - Status: 200, Time: 92.95ms
+[Task 96] POST http://113.47.14.108:8080/movie/page - Status: 200, Time: 92.95ms
+
+=== 压测统计结果 ===
+成功请求数: 100/100
+失败请求数: 0
+成功率: 100.00%
+平均响应时间: 46.04 ms
+最大响应时间: 96.59 ms
+最小响应时间: 15.62 ms
+
+状态码统计:
+  200: 100 次
