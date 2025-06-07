@@ -12,11 +12,11 @@ i recommend!
 
 # 系统架构
 
-<img src="./md-img/系统架构.png">
+<img src="./md-img/系统架构.png" alt="系统架构">
 
 # 压测效果
 
-<img src="./md-img/chart.png">
+<img src="./md-img/chart.png" alt="压测图">
 
 # 文档
 
